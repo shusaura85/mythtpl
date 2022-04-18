@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8" />
+        <title>Test</title>
+        <link rel="stylesheet" href="{$path}style.css" type="text/css" />
+    </head>
+    <body>
+
+    <h3>Loop <span style="color:red">NESTED</span> example with associative array with manual check for empty secondary loop</h3>
+    <tt>
+        <ul> 
+            <li>ID _ Name _ Color</li> 
+            {loop="$user"}
+            <li class="color{$counter%2+1}">{$key+1}) - {$value.name|strtoupper} - {$value.color} 
+                {if="!empty($value.orders)"} 
+                <ul> 
+                    {loop="$value.orders"}
+                    <li>{$value1.name} - loop1: {$key1} - counter1: {$counter1} - counter2: {$counter} - loop2: {$key} - fn: {function="str_replace(array('sn','rf','fsd'), '',$value.order_id)"} - id: {$value.order_id} - name: {$value.order_name}</li> 
+                    {/loop} 
+                </ul> 
+                {/if} 
+            </li>
+            {/loop} 
+        </ul> 
+    </tt> 
+
+	<br><br>
+	
+    <h3>Loop <span style="color:red">NESTED</span> example with associative array with alternate handling for empty loops</h3>
+    <tt>
+        <ul> 
+            <li>ID _ Name _ Color</li> 
+            {loop="$user"}
+            <li class="color{$counter%2+1}">{$key+1}) - {$value.name|strtoupper} - {$value.color} 
+                <ul> 
+                    {loop="$value.orders"}
+                    <li>{$value1.name} - loop1: {$key1} - counter1: {$counter1} - counter2: {$counter} - loop2: {$key} - fn: {function="str_replace(array('sn','rf','fsd'), '',$value.order_id)"} - id: {$value.order_id} - name: {$value.order_name}</li> 
+					{else}
+					<li><em style="color:red">No orders available for loop {$key1}</em></li>
+                    {/loop} 
+                </ul> 
+            </li>
+            {/loop} 
+        </ul> 
+    </tt> 
+
+</body>
+</html>
