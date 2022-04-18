@@ -68,7 +68,7 @@ class Engine {
 								'php'				=> '/{php}/',																						//	{php}					- code inside will be treated as php code (if php is not enabled in configuration, it will be treated as an {ignore} tag)
 								'php_close'			=> '/{\/php}/',																						//	{/php}
 								'include'			=> '/{include="([^"]*)"}/',																			//	{include="relative/path/to/file.html"}	- includes the file specified. path is relative to template file that does the include
-								'function'			=> '/{function="([\\\]*[a-zA-Z_][a-zA-Z_0-9\:\\\]*)(\(.*\)){0,1}"}/',										//	{function="function_name(params)"}		- outputs the result of the specified function. Suports namespaces
+								'function'			=> '/{function="([\\\]*[a-zA-Z_][a-zA-Z_0-9\:\\\]*)(\(.*\)){0,1}"}/',								//	{function="function_name(params)"}		- outputs the result of the specified function. Suports namespaces
 								
 								'ternary'			=> '/{(.[^{?}]*?)\?(.*?)\:(.*?)}/',																	//	{<condition>?"if true":'if false'}
 								'variable'			=> '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',													//	{$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}

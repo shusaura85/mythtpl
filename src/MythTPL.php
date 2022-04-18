@@ -96,7 +96,7 @@ class MythTPL {
 		{
 		return [
 					'tpl_dir'			=> $this->tpl_dir,
-					'cache_dir'			=> $this->tpl_extension,
+					'cache_dir'			=> $this->cache_dir,
 					'tags_icase'		=> $this->tpl_tags_icase,
 					'allow_php'			=> $this->tpl_allow_php,
 					'remove_comments'	=> $this->tpl_remove_comments,
