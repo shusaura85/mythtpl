@@ -40,8 +40,8 @@ $var = array(
 
 );
 
-// add a tag
-MythTPL::registerTag(	"({@.*?@})", // preg split
+// add a tag: {@text@}
+MythTPL::registerTag(	"tag_name_here",
     "{@(.*?)@}", // preg match
     function( $params ){ // function called by the tag
         $value = $params[1][0];
@@ -50,8 +50,8 @@ MythTPL::registerTag(	"({@.*?@})", // preg split
 );
 
 
-// add a tag
-MythTPL::registerTag(	"({%.*?%})", // preg split
+// add a tag: {%text1|text2%}
+MythTPL::registerTag(	"tag_name_here",
     "{%(.*?)(?:\|(.*?))%}", // preg match
     function( $params ){ // function called by the tag
         $value = $params[1][0];
