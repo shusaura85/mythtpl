@@ -27,7 +27,7 @@
 	<hr />
 	String test {function="date('Y-m-d')"} <br><br>
 	{if="$num1 == 10 || $num1 == 20"}
-		yeehaw<br />
+		num1 is in wanted values<br />
 	{/if}
 	String test 2 {#"Y-m-d H:i:s"|date:4108722722} <br><br>
 	String test 2 {#"Y-m-d H:i:s"} <br><br>
@@ -98,6 +98,10 @@
         
 	<h2>Escape variable with modifiers</h2>
 	{$bad_variable|escape} <br><br>
+	
+	<h2>More modifier examples</h2>
+	{#'this IS a STring I╲⟍⎝╲༼◕ ◕ ༽╱⎠⟋╱I'|strtolower|ucwords|escape:"UTF-8"}<br>
+	{#'simple string'|test_modifier:"not such a ", " is it?"}<br>
 	
 	
 	<h2>{noparse}{php}{/noparse} Tag status: {$this->get_tag_php() ? 'enabled' : 'disabled'}</h2>

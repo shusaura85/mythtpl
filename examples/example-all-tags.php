@@ -3,6 +3,9 @@
 // include
 require "../src/autoload.php";
 
+// example modifiers
+require "./inc.example-modifiers.php";
+
 // namespace
 use MythTPL\MythTPL;
 
@@ -41,7 +44,7 @@ $var = array(
 );
 
 // add a tag: {@text@}
-MythTPL::registerTag(	"tag_name_here",
+MythTPL::registerTag(	"simple_custom_tag",
     "{@(.*?)@}", // preg match
     function( $params ){ // function called by the tag
         $value = $params[1][0];
@@ -51,7 +54,7 @@ MythTPL::registerTag(	"tag_name_here",
 
 
 // add a tag: {%text1|text2%}
-MythTPL::registerTag(	"tag_name_here",
+MythTPL::registerTag(	"another_custom_tag",
     "{%(.*?)(?:\|(.*?))%}", // preg match
     function( $params ){ // function called by the tag
         $value = $params[1][0];
