@@ -46,7 +46,7 @@ Installation / Usage
 
 Requirements
 -------------
-MythTPL requires at least `PHP 7.4` to work.
+MythTPL requires at least `PHP 7.4` to work. MythTPL has no external dependencies.
 
 
 Licence
