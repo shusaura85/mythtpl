@@ -29,6 +29,8 @@
 namespace MythTPL;
 
 use Parser\Engine;
+use Error\NotFoundException;
+
 
 // require the built in modifiers
 require_once __DIR__.'/Template/modifiers.php';
@@ -428,7 +430,7 @@ class MythTPL {
 		// if the template doesn't exsist throw an error
 		if ($tpl_file_not_found)
 			{
-			$e = new MythTPL\Error\NotFoundException('Template ' . $templateName . ' not found!');
+			$e = new Error\NotFoundException('Template ' . $templateName . ' not found!');
 			throw $e->templateFile($templateFilepath);
 			}
 
