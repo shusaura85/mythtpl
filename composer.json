@@ -1,0 +1,22 @@
+{
+    "name": "shusaura85/mythtpl",
+    "type": "library",
+    "description": "Easy to use template system for PHP",
+    "homepage":"https://github.com/shusaura85/mythtpl",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Shu Saura"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MythTPL\\": "src/"
+        }
+    }
+}
+

@@ -32,7 +32,7 @@ Supported tags
 Installation / Usage
 --------------------
 
-* Using **Composer** (not yet published on packagist)
+* Using **Composer**
 
     ``` shell
     composer require shusaura85/mythtpl
