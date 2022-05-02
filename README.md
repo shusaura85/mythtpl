@@ -49,6 +49,16 @@ Requirements
 MythTPL requires at least `PHP 7.4` to work. MythTPL has no external dependencies.
 
 
+Differences compared to Rain TPL 3
+----------------------------------
+* Dropped plugin support
+* Dropped function blacklist
+* assign() now accepts only arrays (use assign_var() to set a single value)
+* Configuration is no longer static, you can now configure with constructor or dedicated configuration functions
+* Added reset() function to clear assigned values
+* Added p_assign() function to assign values that are not cleared with reset()
+
+
 Licence
 -------
 
