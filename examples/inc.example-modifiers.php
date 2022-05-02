@@ -12,12 +12,12 @@ with the exception of the 1st function parameter, all aditionals parameters shou
 */
 
 function test_modifier($string, $before_text = null, $after_text = null, $after_text2 = null)
-	{
-	$s = 'Modifying the given string: "'.$string.'" with the following params:<br>';
-	$s .= 'param1: '.($before_text ?? 'not given').'<br>';
-	$s .= 'param2: '.($after_text ?? 'not given').'<br>';
-	$s .= 'param3: '.($after_text2 ?? 'not given').'<br>';
-	$s .= 'Final string is: '. ($before_text.$string.$after_text.$after_text2);
-	
-	return $s;
-	}
+{
+    $s = 'Modifying the given string: "' . $string . '" with the following params:<br>';
+    $s .= 'param1: ' . ($before_text ?? 'not given') . '<br>';
+    $s .= 'param2: ' . ($after_text ?? 'not given') . '<br>';
+    $s .= 'param3: ' . ($after_text2 ?? 'not given') . '<br>';
+    $s .= 'Final string is: ' . ($before_text . $string . $after_text . $after_text2);
+
+    return $s;
+}

@@ -8,11 +8,10 @@ use MythTPL\MythTPL;
 
 // config
 $config = array(
-    "tpl_dir"       => "templates/nested_loop/",
-    "cache_dir"     => "cache/",
-    "debug"         => true // set to false to improve the speed
+    "tpl_dir" => "templates/nested_loop/",
+    "cache_dir" => "cache/",
+    "debug" => true // set to false to improve the speed
 );
-
 
 
 $user = array(
@@ -34,8 +33,7 @@ $user = array(
     array(
         'name' => 'Empty',
         'color' => 'blue',
-        'orders' => array(
-        )
+        'orders' => array()
     ),
     array(
         'name' => 'Earth',
@@ -51,15 +49,16 @@ $user = array(
 
 
 // draw
-$tpl = new MythTPL( $config );
-$tpl->assignVar( "path", 'templates/nested_loop/' );
-$tpl->assignVar( "user", $user );
-echo $tpl->draw( "test" );
+$tpl = new MythTPL($config);
+$tpl->assignVar("path", 'templates/nested_loop/');
+$tpl->assignVar("user", $user);
+echo $tpl->draw("test");
 
 
-
-class Test{
-    static public function method( $variable ){
+class Test
+{
+    static public function method($variable)
+    {
         echo "Hi I am a static method, and this is the parameter passed to me: $variable!";
     }
 }
