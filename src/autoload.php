@@ -26,31 +26,30 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-if(!defined("BASE_DIR"))
-	define("BASE_DIR", __DIR__);
+if (!defined("BASE_DIR"))
+    define("BASE_DIR", __DIR__);
 
 // register the autoloader
-spl_autoload_register( "MythTplAutoloader" );
+spl_autoload_register("MythTplAutoloader");
 
 
 // autoloader
-function MythTplAutoloader( $class )
-	{
-	// it only autoload class into the MythTPL scope
-	if (strpos($class,'MythTPL\\') !== false)
-		{
-		// remove first part of namespace
-		$class = substr($class, 8);
+function MythTplAutoloader($class)
+{
+    // it only autoload class into the MythTPL scope
+    if (strpos($class, 'MythTPL\\') !== false) {
+        // remove first part of namespace
+        $class = substr($class, 8);
 
-		// transform the namespace in path
-		$path = str_replace("\\", DIRECTORY_SEPARATOR, $class );
-		
-		// filepath
-		$abs_path = BASE_DIR . DIRECTORY_SEPARATOR . $path . ".php";
-	
-		if (is_file($abs_path))
-		// require the file
-		require_once $abs_path;
-		}
+        // transform the namespace in path
+        $path = str_replace("\\", DIRECTORY_SEPARATOR, $class);
 
-	}
+        // filepath
+        $abs_path = BASE_DIR . DIRECTORY_SEPARATOR . $path . ".php";
+
+        if (is_file($abs_path))
+            // require the file
+            require_once $abs_path;
+    }
+
+}

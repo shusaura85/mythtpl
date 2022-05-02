@@ -36,17 +36,17 @@ namespace MythTPL\Template;
 
 // escape the specified text using htmlspecialchars (by default uses UTF-8). You can optionally specify the encoding
 // example: {$variable|escape} {$variable|escape:'ISO-8859-1'}
-function escape(string $text, string $use_encoding = 'UTF-8'):string
-	{
-	return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, $use_encoding, false);
-	}
+function escape(string $text, string $use_encoding = 'UTF-8'): string
+{
+    return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, $use_encoding, false);
+}
 
 // format a number to 2 decimals (or how many you specify)
 // {$number|nice_num} {$number|nice_num:2}
-function nice_num($str, int $decimals = 2)
-	{
-	return number_format($str, $decimals, '.', '');
-	}
+function nicenum($str, int $decimals = 2)
+{
+    return number_format($str, $decimals, '.', '');
+}
 
 
 

@@ -31,27 +31,28 @@ namespace MythTPL\Error;
 /**
  * Basic MythTPL tpl exception.
  */
-class Exception extends \Exception {
+class Exception extends \Exception
+{
 
-	/**
-	 * Path of template file with error.
-	 */
-	protected $templateFile = '';
+    /**
+     * Path of template file with error.
+     */
+    protected $templateFile = '';
 
-	/**
-	 * Handles path of template file with error.
-	 *
-	 * @param string | null $templateFile
-	 * @return \MythTPL\Tpl_Exception | string
-	 */
-	public function templateFile($templateFile)
-		{
-		if(is_null($templateFile))
-			return $this->templateFile;
+    /**
+     * Handles path of template file with error.
+     *
+     * @param string | null $templateFile
+     * @return \MythTPL\Error\Exception | string
+     */
+    public function templateFile($templateFile)
+    {
+        if (is_null($templateFile))
+            return $this->templateFile;
 
-		$this->templateFile = (string) $templateFile;
-		return $this;
-		}
+        $this->templateFile = (string)$templateFile;
+        return $this;
+    }
 }
 
 // -- end

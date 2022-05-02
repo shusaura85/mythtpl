@@ -66,7 +66,7 @@ MythTPL::registerTag(	"another_custom_tag",
 
 // draw
 $tpl = new MythTPL( $config );
-$tpl->set_tag_php(true);
+$tpl->setTagPhp(true);
 $tpl->assign( $var );
 echo $tpl->draw( "test-all-tags" );
 

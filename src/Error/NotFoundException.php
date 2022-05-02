@@ -31,7 +31,8 @@ namespace MythTPL\Error;
 /**
  * Exception thrown when template file does not exists.
  */
-class NotFoundException extends Exception {
+class NotFoundException extends Exception
+{
 
 }
 

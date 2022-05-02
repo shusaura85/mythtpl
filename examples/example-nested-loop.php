@@ -52,8 +52,8 @@ $user = array(
 
 // draw
 $tpl = new MythTPL( $config );
-$tpl->assign_var( "path", 'templates/nested_loop/' );
-$tpl->assign_var( "user", $user );
+$tpl->assignVar( "path", 'templates/nested_loop/' );
+$tpl->assignVar( "user", $user );
 echo $tpl->draw( "test" );
 
 
