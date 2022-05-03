@@ -267,7 +267,7 @@ class MythTPL
         return $this;
     }
 
-    public function getTagsICase(): bool
+    public function getTagICase(): bool
     {
         return $this->tpl_tags_icase;
     }
@@ -359,6 +359,35 @@ class MythTPL
         }
 
         return $this;
+    }
+
+
+    /**
+     * Read assigned variable
+     * eg.     $t->readVar('name');
+     *
+     * @param string $variable Name of template variable or associative array name/value
+     * @param bool $is_persistent If the variable should be persistent or not
+     *
+     * @return self
+     */
+    public function readVar(string $variable, bool $is_persistent = false)
+    {
+        if ($is_persistent) {
+            if (!array_key_exists($variable, $this->persistent_data)) {
+                $e = new Error\NotFoundException('Persistent variable "' . $variable . '" not found!');
+                throw $e->templateFile($variable);
+            }
+            
+            return $this->persistent_data[$variable];
+        } else {
+            if (!array_key_exists($variable, $this->template_data)) {
+                $e = new Error\NotFoundException('Variable "' . $variable . '" not found!');
+                throw $e->templateFile($variable);
+            }
+            
+            return $this->template_data[$variable];
+        }
     }
 
 
