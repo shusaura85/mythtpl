@@ -52,28 +52,28 @@ class Engine
     // tags natively supported
     // format: 'name' => 'match regex'
     protected static $tags = array(
-        'loop' => '/{loop="(?<variable>\${0,1}[^"]*)"(?: as (?<key>\$.*?)(?: => (?<value>\$.*?)){0,1}){0,1}}/',    //	{loop="$var"} {loop="$var" as [$key=>]$value}
-        'loop_close' => '/{\/loop}/',                                                                                    //	{/loop}
-        'loop_break' => '/{break}/',                                                                                        //	{break} - used in loops
-        'loop_continue' => '/{continue}/',                                                                                    //	{continue} - used in loops
-        'if' => '/{if="([^"]*)"}/',                                                                                //	{if="<condition>"}
-        'elseif' => '/{elseif="([^"]*)"}/',                                                                            //	{elseif="<condition>"}
-        'else' => '/{else}/',                                                                                        //	{else}		- can also be used inside {loop} for cases of empty array/iterable
-        'if_close' => '/{\/if}/',                                                                                        //	{/if}
-        'autoescape' => '/{autoescape="([^"]*)"}/',                                                                        //	{autoescape="on|off"}	- if on, will automatically escape any output from tags inside, if off, disables automatic escape
-        'autoescape_close' => '/{\/autoescape}/',                                                                                //	{/autoescape}			- returns to default setting
-        'noparse' => '/{noparse}/',                                                                                    //	{noparse}				- any tags inside will not be parsed and will be treated as plaintext
-        'noparse_close' => '/{\/noparse}/',                                                                                    //	{/noparse}
-        'ignore' => '/{ignore}|{\*/',                                                                                //	{ignore}	(alternative) {*			- text inside this tag will not be present in compiled template
-        'ignore_close' => '/{\/ignore}|\*}/',                                                                                //	{/ignore}   (alternative) *}
-        'php' => '/{php}/',                                                                                        //	{php}					- code inside will be treated as php code (if php is not enabled in configuration, it will be treated as an {ignore} tag)
-        'php_close' => '/{\/php}/',                                                                                        //	{/php}
-        'include' => '/{include="([^"]*)"}/',                                                                            //	{include="relative/path/to/file.html"}	- includes the file specified. path is relative to template file that does the include
-        'function' => '/{function="([\\\]*[a-zA-Z_][a-zA-Z_0-9\:\\\]*)(\(.*\)){0,1}"}/',                                //	{function="function_name(params)"}		- outputs the result of the specified function. Suports namespaces
+        'loop' => '/{loop="(?<variable>\${0,1}[^"]*)"(?: as (?<key>\$.*?)(?: => (?<value>\$.*?)){0,1}){0,1}}/',    //    {loop="$var"} {loop="$var" as [$key=>]$value}
+        'loop_close' => '/{\/loop}/',                                                                              //    {/loop}
+        'loop_break' => '/{break}/',                                                                               //    {break} - used in loops
+        'loop_continue' => '/{continue}/',                                                                         //    {continue} - used in loops
+        'if' => '/{if="([^"]*)"}/',                                                                                //    {if="<condition>"}
+        'elseif' => '/{elseif="([^"]*)"}/',                                                                        //    {elseif="<condition>"}
+        'else' => '/{else}/',                                                                                      //    {else}        - can also be used inside {loop} for cases of empty array/iterable
+        'if_close' => '/{\/if}/',                                                                                  //    {/if}
+        'autoescape' => '/{autoescape="([^"]*)"}/',                                                                //    {autoescape="on|off"}    - if on, will automatically escape any output from tags inside, if off, disables automatic escape
+        'autoescape_close' => '/{\/autoescape}/',                                                                  //    {/autoescape}            - returns to default setting
+        'noparse' => '/{noparse}/',                                                                                //    {noparse}                - any tags inside will not be parsed and will be treated as plaintext
+        'noparse_close' => '/{\/noparse}/',                                                                        //    {/noparse}
+        'ignore' => '/{ignore}|{\*/',                                                                              //    {ignore}    (alternative) {*            - text inside this tag will not be present in compiled template
+        'ignore_close' => '/{\/ignore}|\*}/',                                                                      //    {/ignore}   (alternative) *}
+        'php' => '/{php}/',                                                                                        //    {php}                    - code inside will be treated as php code (if php is not enabled in configuration, it will be treated as an {ignore} tag)
+        'php_close' => '/{\/php}/',                                                                                //    {/php}
+        'include' => '/{include="([^"]*)"}/',                                                                      //    {include="relative/path/to/file.html"}    - includes the file specified. path is relative to template file that does the include
+        'function' => '/{function="([\\\]*[a-zA-Z_][a-zA-Z_0-9\:\\\]*)(\(.*\)){0,1}"}/',                           //    {function="function_name(params)"}        - outputs the result of the specified function. Suports namespaces
 
-        'ternary' => '/{(.[^{?}]*?)\?(.*?)\:(.*?)}/',                                                                    //	{<condition>?"if true":'if false'}
-        'variable' => '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                                    //	{$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}
-        'constant' => '/{\#[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*\#{0,1}}/',                                                //	{#CONSTANT} {#CONSTANT|modifier[|modifier]} {#CONSTANT|modifier:param2,param3,"param4"} {#CONSTANT|modifier:param2,param3,"param4"|another[|....]}
+        'ternary' => '/{(.[^{?}]*?)\?(.*?)\:(.*?)}/',                                                              //    {<condition>?"if true":'if false'}
+        'variable' => '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                                //    {$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}
+        'constant' => '/{\#[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*\#{0,1}}/',                                         //    {#CONSTANT} {#CONSTANT|modifier[|modifier]} {#CONSTANT|modifier:param2,param3,"param4"} {#CONSTANT|modifier:param2,param3,"param4"|another[|....]}
     );
 
     // safety check for templates - prevent accessing template file directly
@@ -90,12 +90,11 @@ class Engine
     /**
      * Compile the file and save it in the cache
      *
-     * @param string $templateName : name of the template
-     * @param string $templateDirectory
-     * @param string $templateFilepath
+     * @param string $templateDirectory : path to template root
+     * @param string $templateFilepath : input template file
      * @param string $parsedTemplateFilepath : cache file where to save the template
      */
-    public function compileFile(string $templateName, string $templateDirectory, string $templateFilepath, string $parsedTemplateFilepath): void
+    public function compileFile(string $templateDirectory, string $templateFilepath, string $parsedTemplateFilepath): void
     {
         // create directories
         if (!is_dir($this->config['cache_dir'])) {
@@ -140,12 +139,10 @@ class Engine
     /**
      * Compile a string and save it in the cache
      *
-     * @param string $templateName : name of the template
-     * @param string $templateFilepath
-     * @param string $parsedTemplateFilepath : cache file where to save the template
      * @param string $code : code to compile
+     * @param string $parsedTemplateFilepath : cache file where to save the template
      */
-    public function compileString(string $templateName, string $templateFilepath, string $parsedTemplateFilepath, string $code): void
+    public function compileString(string $code, string $parsedTemplateFilepath): void
     {
         // create directories
         if (!is_dir($this->config['cache_dir'])) {
@@ -159,6 +156,9 @@ class Engine
             throw new Exception('Cache directory ' . $this->config['cache_dir'] . 'doesn\'t have write permission. Set write permission.');
         }
 
+        // always use unix line endings
+        $code = str_replace("\r\n", "\n", $code);
+        
         // xml substitution
         $code = preg_replace("/<\?xml(.*?)\?>/s", "##XML\\1XML##", $code);
 
@@ -170,7 +170,7 @@ class Engine
             return "<?php echo '<?xml " . stripslashes($match[1]) . " ?>'; ?>";
         }, $code);
 
-        $parsedCode = self::SAFETY_CHECK . $this->compileTemplate($code, $isString = true, $templateDirectory = null, $templateFilepath);
+        $parsedCode = self::SAFETY_CHECK . $this->compileTemplate($code, $isString = true, $templateDirectory = '', $templateFilepath = '');
 
         // fix the php-eating-newline-after-closing-tag-problem
         $parsedCode = str_replace("?>\n", "?>\n\n", $parsedCode);

@@ -490,7 +490,7 @@ class MythTPL
                 $this->parser = new Parser\Engine($this->getParserConfiguration(), static::$registered_tags);
             }
 
-            $this->parser->compileFile($templateName, $templateDirectory, $templateFilepath, $parsedTemplateFilepath);
+            $this->parser->compileFile($templateDirectory, $templateFilepath, $parsedTemplateFilepath);
         }
         return $parsedTemplateFilepath;
     }
@@ -507,7 +507,6 @@ class MythTPL
         // set filename
         $templateName = md5($string . $this->config_checksum);
         $parsedTemplateFilepath = $this->cache_dir . $templateName . '.s.mtpl.php';
-        $templateFilepath = '';
 
 
         // Compile the template if the original has been updated
@@ -516,7 +515,7 @@ class MythTPL
                 $this->parser = new Parser\Engine($this->getParserConfiguration(), static::$registered_tags);
             }
 
-            $this->parser->compileString($templateName, $templateFilepath, $parsedTemplateFilepath, $string);
+            $this->parser->compileString($string, $parsedTemplateFilepath);
         }
 
         return $parsedTemplateFilepath;
