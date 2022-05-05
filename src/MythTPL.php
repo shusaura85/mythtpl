@@ -38,7 +38,7 @@ require_once __DIR__ . '/Template/modifiers.php';
 class MythTPL
 {
 
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.2';
 
     // variables that should always be available - will remain even after calling reset()
     protected array $persistent_data = [];

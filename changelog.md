@@ -3,6 +3,8 @@
 * [fixed] Invalid parameter value passed in compileString() function of Parser\Engine  
 * [change] dropped unused parameters from compileTemplate() and compileString() in Parser\Engine  
 * [new] initial Unit Test coverage for the code  
+* [fixed] fixed typo in generated code for include tag in Parser\Engine  
+* [optimization] de-duplicated code for determining file paths in processTemplate() (remnant from Rain TPL3 multiple folder support)  
   
   
 ### v1.0.1 PSR-12  
