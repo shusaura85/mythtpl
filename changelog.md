@@ -1,3 +1,16 @@
+### v1.0.2   
+-----------
+* [fixed] Invalid parameter value passed in compileString() function of Parser\Engine  
+* [change] dropped unused parameters from compileTemplate() and compileString() in Parser\Engine  
+* [new] initial Unit Test coverage for the code  
+  
+  
+### v1.0.1 PSR-12  
+------------------
+* [change] changed code formatting style to PSR-12
+* [change] changed function names to PSR-12
+  
+  
 ### v1.0.0 Vague list of changes from Rain TPL  
 ------------------------------------------
 * [removed] plugin support  
