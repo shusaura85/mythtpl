@@ -461,21 +461,15 @@ class MythTPL
         // absolute path
         if ($template[0] == '/') {
             $templateDirectory = $templateBasedir;
-            $templateFilepath = $templateDirectory . $templateName . '.' . $this->tpl_extension;
-            $parsedTemplateFilepath = $this->cache_dir . $tpl_cache_filename . "." . hash("crc32b", $templateDirectory . $this->config_checksum) . '.mtpl.php';
-            // For check templates are exists
-            if (file_exists($templateFilepath)) {
-                $tpl_file_not_found = false;
-            }
         } else {
             $templateDirectory .= $templateBasedir;
-            $templateFilepath = $templateDirectory . $templateName . '.' . $this->tpl_extension;
-            $parsedTemplateFilepath = $this->cache_dir . $tpl_cache_filename . "." . hash("crc32b", $templateDirectory . $this->config_checksum) . '.mtpl.php';
+        }
+        $templateFilepath = $templateDirectory . $templateName . '.' . $this->tpl_extension;
+        $parsedTemplateFilepath = $this->cache_dir . $tpl_cache_filename . "." . hash("crc32b", $templateDirectory . $this->config_checksum) . '.mtpl.php';
 
-            // For check templates are exists
-            if (file_exists($templateFilepath)) {
-                $tpl_file_not_found = false;
-            }
+        // Ensure requested template exists
+        if (file_exists($templateFilepath)) {
+            $tpl_file_not_found = false;
         }
 
         // if the template doesn't exsist throw an error
