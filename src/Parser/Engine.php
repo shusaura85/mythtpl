@@ -342,11 +342,11 @@ class Engine
 
                     if (strpos($matches[1], '$') !== false) {
                         //dynamic include
-                        $parsedCode .= '<?php require $this->processTemplatee(' . $includeTemplate . ');?>';
+                        $parsedCode .= '<?php require $this->processTemplate(' . $includeTemplate . ');?>';
 
                     } else {
                         //dynamic include
-                        $parsedCode .= '<?php require $this->processTemplatee("' . $includeTemplate . '");?>';
+                        $parsedCode .= '<?php require $this->processTemplate("' . $includeTemplate . '");?>';
                     }
 
                     continue;    // go to next loop step
