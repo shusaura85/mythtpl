@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Myth TPL - Easy and Fast template engine</title>
+</head>
+<body>
+
+    <!-- if remove_comments is enabled this will disappear -->
+
+    
+    
+	
+	<h1>Test Myth TPL -TEST-VERSION-1-2-3-</h1>
+	<hr>
+
+	<h2>Variables</h2>
+	Variable: Hello World! <br><br>
+	Init Variable  <br><br>
+	Show Variable 10 <br><br>
+	Modifier 12 <br><br>
+	Cascade Modifier 5 <br><br>
+	Scoping (object) Myth <br><br>
+	Scoping (array) Monday <br><br>
+	Variable as key Thursday <br><br>
+	Var test Hello World! <br><br>
+	<hr />
+	String test 2100-03-14 <br><br>
+	
+		num1 is in wanted values<br />
+	
+	String test 2 2100-03-14 15:52:02 <br><br>
+	String test 2 Y-m-d H:i:s <br><br>
+	<a href="#0">Hello World!</a><br><a href="#1">Hello World!</a><br><a href="#2">Hello World!</a><br><a href="#3">Hello World!</a><br><a href="#4">Hello World!</a><br><a href="#5">Hello World!</a><br><a href="#6">Hello World!</a><br>
+	<hr />
+
+    <h2>Ternary Operator</h2>
+    The title is: Myth TPL - Easy and Fast template engine
+
+
+	<h2>Loop</h2>
+	Simple Loop
+	<ul>
+		
+		<li>
+			0 Monday
+		</li>
+		
+		<li>
+			1 Tuesday
+		</li>
+		
+		<li>
+			2 Wednesday
+		</li>
+		
+		<li>
+			3 Thursday
+		</li>
+		
+		<li>
+			4 Friday
+		</li>
+		
+		<li>
+			5 Saturday
+		</li>
+		
+		<li>
+			6 Sunday
+		</li>
+		
+	</ul><br><br>
+
+	Modifier on Loop
+	<ul>
+		
+		<li>Sunday</li>
+		
+		<li>Saturday</li>
+		
+		<li>Friday</li>
+		
+		<li>Thursday</li>
+		
+		<li>Wednesday</li>
+		
+		<li>Tuesday</li>
+		
+		<li>Monday</li>
+		
+	</ul><br><br>
+
+	Simple Nested Loop
+	<ul>
+		
+		<li>
+			
+			Apple,
+			
+			1996,
+			
+		</li>
+		
+		<li>
+			
+			PC,
+			
+			1997,
+			
+		</li>
+		
+	</ul><br><br>
+
+	Loop on created array
+	<ul>
+		
+		<li>5</li>
+		
+		<li>6</li>
+		
+		<li>7</li>
+		
+		<li>8</li>
+		
+		<li>9</li>
+		
+		<li>10</li>
+		
+	</ul><br><br>
+	
+	Loop on empty array
+	<ul>
+		
+		<li>This is an empty array</li>
+		
+	</ul><br><br>
+
+	<h2>If</h2>
+	True condition: This is true <br><br>
+	Modifier inside if: True <br><br>
+
+
+	<h2>Function test</h2>
+	Function with parameters: 06-05-2022 <br><br>
+
+	<h2>Escape Text</h2>
+	Malicious content: Hey this is a malicious XSS &lt;script&gt;alert(&quot;auto_escape is always enabled&quot;);&lt;/script&gt; <br><br>
+
+	<h2>Custom tag</h2>
+	Translate: <b>message to translate</b> <br><br>
+
+	<h2>Custom tag 2</h2>
+	Translate: <b>message to translate</b> in <b>english</b> <br><br>
+        
+	<h2>Escape variable with autoescape</h2>
+	&lt;script&gt;alert(&#039;evil javascript here&#039;);&lt;/script&gt;
+	<script>console.log('this is safe')</script>
+        
+	<h2>Escape variable with modifiers</h2>
+	&lt;script&gt;alert(&#039;evil javascript here&#039;);&lt;/script&gt; <br><br>
+	
+	<h2>More modifier examples</h2>
+	This Is A String I╲⟍⎝╲༼◕ ◕ ༽╱⎠⟋╱i<br>
+	
+	
+	<h2>{php} Tag status: disabled</h2>
+	
+
+
+</body>
+</html>
