@@ -105,7 +105,7 @@
 
 
 	<h2>Function test</h2>
-	Function with parameters: <?php echo date('d-m-Y'); ?> <br><br>
+	Function with parameters: <?php echo date('d-m-Y', 4108722722); ?> <br><br>
 
 	<h2>Escape Text</h2>
 	Malicious content: <?php echo htmlspecialchars( $bad_text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8', FALSE ); ?> <br><br>
