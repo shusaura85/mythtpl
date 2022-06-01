@@ -1,3 +1,11 @@
+### v1.0.3   
+-----------
+* [new] Added new tag {t} for component usage  
+* [new] Configuration option "components_dir" to specify location of components  
+* [new] Added functions getComponentsDir() and setComponentsDir() to MythTPL\MythTPL to get and set location of components  
+* [change] Added $is_component parameter to protected function processTemplate() in MythTPL\MythTPL  
+  
+  
 ### v1.0.2   
 -----------
 * [fixed] Invalid parameter value passed in compileString() function of Parser\Engine  
