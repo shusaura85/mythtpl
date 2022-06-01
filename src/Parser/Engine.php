@@ -74,6 +74,8 @@ class Engine
         'ternary' => '/{(.[^{?}]*?)\?(.*?)\:(.*?)}/',                                                              //    {<condition>?"if true":'if false'}
         'variable' => '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                                //    {$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}
         'constant' => '/{\#[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*\#{0,1}}/',                                         //    {#CONSTANT} {#CONSTANT|modifier[|modifier]} {#CONSTANT|modifier:param2,param3,"param4"} {#CONSTANT|modifier:param2,param3,"param4"|another[|....]}
+
+        'component' => '/{t="(?<tname>([^"]*))"(?: (use|data)="(?<tdata>\${0,1}[^"]*)"){0,1}(?: (sel|selected|value)="(?<tdef>\${0,1}[^"]*)"){0,1}/'	// {t="component/input"[ data="$component_data"][ value="-1"]} - include a component and give it the data required (use and default attributes are optional)
     );
 
     // safety check for templates - prevent accessing template file directly
@@ -549,6 +551,60 @@ class Engine
 
                     continue;    // go to next loop step
                 }
+
+
+                //component tag
+                if (preg_match($tagMatch['component'], $html, $matches)) {
+                    //get the folder of the actual component template
+                    $actualFolder = $templateDirectory;
+
+                    if (substr($actualFolder, 0, strlen($this->config['tpl_dir'])) == $this->config['tpl_dir']) {
+                        $actualFolder = substr($actualFolder, strlen($this->config['tpl_dir']));
+                    }
+
+                    //get the included template
+                    if (strpos($matches[1], '$') !== false) {
+                        $includeTemplate = "'$actualFolder'." . $this->varReplace($matches['tname'], $loopLevel);
+                    } else {
+                        $includeTemplate = $actualFolder . $this->varReplace($matches['tname'], $loopLevel);
+                    }
+
+                    // reduce the path
+                    $includeTemplate = Engine::reducePath($includeTemplate);
+
+                    $tdata = '';
+                    $tdef = '';
+                    if (isset($matches['tdata'])) {
+                        $tdata = $this->varReplace($matches['tdata'], $loopLevel);
+                    }
+
+                    if (isset($matches['tdef'])) {
+                        $tdef = $this->varReplace($matches['tdef'], $loopLevel);
+                    }
+
+                    $parsedCode .= "<?php ";
+                    $parsedCode .= 'if (isset($tdata)) { $tdata_original_value = $tdata; unset($tdata); } ';
+                    $parsedCode .= 'if (isset($tdef)) { $tdef_original_value = $tdef; unset($tdef); } ';
+
+                    $parsedCode .= '$tdata = '.((strpos($tdata,'$')!==false) ? $tdata : '"'.$tdata.'"').'; ';
+                    $parsedCode .= '$tdef = '.((strpos($tdef,'$')!==false) ? $tdef : '"'.$tdef.'"').'; ';
+
+                    if (strpos($matches[1], '$') !== false) {
+                        //dynamic include
+                        $parsedCode .= 'require $this->processTemplate(' . $includeTemplate . ', true); ';
+
+                    } else {
+                        //dynamic include
+                        $parsedCode .= 'require $this->processTemplate("' . $includeTemplate . '", true); ';
+                    }
+
+                    $parsedCode .= 'if (isset($tdata_original_value)) { $tdata = $tdata_original_value; unset($tdata_original_value); } ';
+                    $parsedCode .= 'if (isset($tdef_original_value)) { $tdef = $tdef_original_value; unset($tdef_original_value); } ';
+                    $parsedCode .= '?>';
+
+                    continue;    // go to next loop step
+                }
+
 
                 // registered tags
                 $found = FALSE;

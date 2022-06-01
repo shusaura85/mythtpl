@@ -38,7 +38,7 @@ require_once __DIR__ . '/Template/modifiers.php';
 class MythTPL
 {
 
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     // variables that should always be available - will remain even after calling reset()
     protected array $persistent_data = [];
@@ -48,6 +48,7 @@ class MythTPL
     protected string $cache_dir = 'cache/';
     protected string $tpl_extension = 'html';
     protected string $tpl_dir = 'templates/';
+    protected string $components_dir = 'templates/components/';
     protected bool $debug = false;
 
     protected bool $tpl_tags_icase = false;    // if the tags are case insensitive. will use the /i modifier in regex. doesn't apply to custom tags
@@ -84,6 +85,7 @@ class MythTPL
         $this->config_checksum = serialize([
             $this->debug,
             $this->tpl_dir,
+            $this->components_dir,
             $this->tpl_extension,
             $this->tpl_tags_icase,
             $this->tpl_allow_php,
@@ -100,6 +102,7 @@ class MythTPL
     {
         return [
             'tpl_dir' => $this->tpl_dir,
+            'components_dir' => $this->components_dir,
             'cache_dir' => $this->cache_dir,
             'tags_icase' => $this->tpl_tags_icase,
             'allow_php' => $this->tpl_allow_php,
@@ -181,6 +184,9 @@ class MythTPL
                 case 'tpl_ext':
                     $this->setTplExt($value);
                     break;
+                case 'components_dir':
+                    $this->setComponentsDir($value);
+                    break;
                 case 'debug':
                     $this->setDebug($value);
                     break;
@@ -236,6 +242,19 @@ class MythTPL
     public function setTplExt(string $tpl_ext = 'html'): self
     {
         $this->tpl_extension = $tpl_ext;
+        $this->calculateChecksum();
+
+        return $this;
+    }
+
+    public function getComponentsDir(): string
+    {
+        return $this->components_dir;
+    }
+
+    public function setComponentsDir(string $components_dir = 'templates/components/'): self
+    {
+        $this->components_dir = self::addTrailingSlash($components_dir);
         $this->calculateChecksum();
 
         return $this;
@@ -443,7 +462,7 @@ class MythTPL
      * @throw \MythTPL\Error\NotFoundException the file doesn't exists
      * @return string full filepath that php must use to include
      */
-    protected function processTemplate(string $template): string
+    protected function processTemplate(string $template, bool $is_component = false): string
     {
         // set filename
         $templateName = basename($template);
@@ -452,11 +471,11 @@ class MythTPL
         $templateFilepath = null;
         $parsedTemplateFilepath = null;
 
-        $templateDirectory = $this->tpl_dir;
+        $templateDirectory = $is_component ? $this->components_dir : $this->tpl_dir;
 
         $tpl_file_not_found = true;
 
-        $tpl_cache_filename = str_replace("/", ".", $template);
+        $tpl_cache_filename = ($is_component ? 'component-' : '') . str_replace("/", ".", $template);
 
         // absolute path
         if ($template[0] == '/') {
