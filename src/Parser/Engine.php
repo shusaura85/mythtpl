@@ -556,10 +556,10 @@ class Engine
                 //component tag
                 if (preg_match($tagMatch['component'], $html, $matches)) {
                     //get the folder of the actual component template
-                    $actualFolder = $templateDirectory;
+                    $actualFolder = $this->config['components_dir'];
 
-                    if (substr($actualFolder, 0, strlen($this->config['tpl_dir'])) == $this->config['tpl_dir']) {
-                        $actualFolder = substr($actualFolder, strlen($this->config['tpl_dir']));
+                    if (substr($actualFolder, 0, strlen($this->config['components_dir'])) == $this->config['components_dir']) {
+                        $actualFolder = substr($actualFolder, strlen($this->config['components_dir']));
                     }
 
                     //get the included template
