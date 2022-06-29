@@ -1,4 +1,16 @@
+{* default values for the component - this also prevents errors about unassigned values required by the component *}
+
+{$tdata.label = $tdata.label ?? 'No label defined'}
+{$tdata.name = $tdata.name ?? 'text_field_'.time()}
+{$tdata.id = $tdata.id ?? $tdata.name}
+{$tdata.value = $tdata.value ?? ''}
+
+{if="isset($tdata.use)"}
+{loop="$tdata.use"} {$tdata.$key = $value}{/loop}
+{/if}
+
+{* end default values *}
 <div>
 	{$tdata.label}<br />
-	<input type="text" name="{$tdata.name}" id="{$tdata.id}" value="{$tdef}">
+	<input type="text" name="{$tdata.name}" id="{$tdata.id}" value="{$tdata.value|htmlspecialchars}">
 </div>

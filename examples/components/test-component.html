@@ -1,0 +1,13 @@
+{* default values for the component - this also prevents errors about unassigned values required by the component *}
+
+{$tdata.data = $tdata.data ?? ['world'=>'not defined']}
+{$tdata.data.world = $tdata.data.world ?? 'not defined'}
+{$tdata.attr = $tdata.attr ?? 'This line is supposed to be set by the "<strong>attr</strong>" attribute but it was not defined in the call to the component. It is recommended to have default values set in the component in case values are not given'}
+
+
+{* end default values *}
+<div style="margin: 10px 20px; padding: 10px; background:rgba(0,255,0,0.1); color: black; border: 2px solid green; border-radius: 4px">
+	{$tdata.data['world']}	
+	<br /><br />
+	{$tdata.attr}
+</div>

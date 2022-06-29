@@ -75,7 +75,7 @@ class Engine
         'variable' => '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                                //    {$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}
         'constant' => '/{\#[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*\#{0,1}}/',                                         //    {#CONSTANT} {#CONSTANT|modifier[|modifier]} {#CONSTANT|modifier:param2,param3,"param4"} {#CONSTANT|modifier:param2,param3,"param4"|another[|....]}
 
-        'component' => '/{t="(?<tname>([^"]*))"(?: (use|data)="(?<tdata>\${0,1}[^"]*)"){0,1}(?: (sel|selected|value)="(?<tdef>\${0,1}[^"]*)"){0,1}/'	// {t="component/input"[ data="$component_data"][ value="-1"]} - include a component and give it the data required (use and default attributes are optional)
+        'component' => '/{t="(?<tname>([^"]*))"(?<tval> (.*?)){0,1}}/',                                            // {t="component/input"[ attrib="$value"][ attrib2="value2"][ attrib3="$variable"]} - include a component and give it the data required using attributes similar to html tags. Attributes are available in the $tdata variable
     );
 
     // safety check for templates - prevent accessing template file directly
@@ -563,7 +563,7 @@ class Engine
                     }
 
                     //get the included template
-                    if (strpos($matches[1], '$') !== false) {
+                    if (strpos($matches['tname'], '$') !== false) {
                         $includeTemplate = "'$actualFolder'." . $this->varReplace($matches['tname'], $loopLevel);
                     } else {
                         $includeTemplate = $actualFolder . $this->varReplace($matches['tname'], $loopLevel);
@@ -572,34 +572,38 @@ class Engine
                     // reduce the path
                     $includeTemplate = Engine::reducePath($includeTemplate);
 
-                    $tdata = '';
-                    $tdef = '';
-                    if (isset($matches['tdata'])) {
-                        $tdata = $this->varReplace($matches['tdata'], $loopLevel);
-                    }
-
-                    if (isset($matches['tdef'])) {
-                        $tdef = $this->varReplace($matches['tdef'], $loopLevel);
+                    $tdata = [];
+                    if (isset($matches['tval'])) {
+                        // split params
+                        $cparams = explode('" ', $matches['tval']." "); // we add a space at the end so we split properly
+                        if (count($cparams)>0) {
+                            foreach ($cparams as $cparam) {
+                                $paramparts = explode("=", $cparam, 2);
+                                if (count($paramparts)==1) {
+                                    $tdata[] = "'".trim($paramparts[0])."' => '".trim($paramparts[0])."'";
+                                } else {
+                                    $str_param = substr(trim($paramparts[1]),1); // drop the first char "
+                                    $str_wrapper = (strpos($paramparts[1],'$')!==false) ? '' : '"';
+                                    $tdata[] = "'".trim($paramparts[0])."' => ".$str_wrapper . $this->varReplace($str_param, $loopLevel).$str_wrapper;
+                                }
+                            }
+                        }
                     }
 
                     $parsedCode .= "<?php ";
                     $parsedCode .= 'if (isset($tdata)) { $tdata_original_value = $tdata; unset($tdata); } ';
-                    $parsedCode .= 'if (isset($tdef)) { $tdef_original_value = $tdef; unset($tdef); } ';
 
-                    $parsedCode .= '$tdata = '.((strpos($tdata,'$')!==false) ? $tdata : '"'.$tdata.'"').'; ';
-                    $parsedCode .= '$tdef = '.((strpos($tdef,'$')!==false) ? $tdef : '"'.$tdef.'"').'; ';
+                    $parsedCode .= '$tdata = ['.implode(", ", $tdata).']; ';
 
                     if (strpos($matches[1], '$') !== false) {
                         //dynamic include
                         $parsedCode .= 'require $this->processTemplate(' . $includeTemplate . ', true); ';
-
                     } else {
                         //dynamic include
                         $parsedCode .= 'require $this->processTemplate("' . $includeTemplate . '", true); ';
                     }
 
                     $parsedCode .= 'if (isset($tdata_original_value)) { $tdata = $tdata_original_value; unset($tdata_original_value); } ';
-                    $parsedCode .= 'if (isset($tdef_original_value)) { $tdef = $tdef_original_value; unset($tdef_original_value); } ';
                     $parsedCode .= '?>';
 
                     continue;    // go to next loop step
@@ -649,6 +653,7 @@ class Engine
             }
         }
 
+        $parsedCode = str_replace("?>\n<?php", ' ', $parsedCode);
         $parsedCode = str_replace('?><?php', ' ', $parsedCode);
 
         return $parsedCode;

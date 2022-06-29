@@ -7,8 +7,11 @@
 <body>
 <form action="#">
 	{t="text" use="$inputs.name" value="test"}
-	{t="email" data="$inputs.email" sel="user@example.org"}
+	{t="email" data="$inputs.email" value="user@example.org"}
 	
+	{$testvar = ['world' => 'This is a component with data assigned inside the template']}
+	{t="test-component" data="$testvar"}
+
 </form>
 </body>
 </html>
