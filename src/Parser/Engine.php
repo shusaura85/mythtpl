@@ -89,6 +89,12 @@ class Engine
     }
 
 
+    public function updateConfig(array $config)
+    {
+        $this->config = $config;
+    }
+
+
     /**
      * Compile the file and save it in the cache
      *

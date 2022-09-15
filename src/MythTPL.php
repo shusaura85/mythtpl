@@ -502,6 +502,9 @@ class MythTPL
             if (!($this->parser instanceof Parser\Engine)) {
                 $this->parser = new Parser\Engine($this->getParserConfiguration(), static::$registered_tags);
             }
+            else {
+                $this->parser->updateConfig($this->getParserConfiguration());
+            }
 
             $this->parser->compileFile($templateDirectory, $templateFilepath, $parsedTemplateFilepath);
         }
@@ -526,6 +529,9 @@ class MythTPL
         if ($this->debug || !file_exists($parsedTemplateFilepath)) {
             if (!($this->parser instanceof Parser\Engine)) {
                 $this->parser = new Parser\Engine($this->getParserConfiguration(), static::$registered_tags);
+            }
+            else {
+                $this->parser->updateConfig($this->getParserConfiguration());
             }
 
             $this->parser->compileString($string, $parsedTemplateFilepath);
