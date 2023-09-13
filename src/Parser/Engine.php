@@ -586,11 +586,15 @@ class Engine
                             foreach ($cparams as $cparam) {
                                 $paramparts = explode("=", $cparam, 2);
                                 if (count($paramparts)==1) {
-                                    $tdata[] = "'".trim($paramparts[0])."' => '".trim($paramparts[0])."'";
+                                    if (trim($paramparts[0]) != '') {
+                                        $tdata[] = "'".trim($paramparts[0])."' => '".trim($paramparts[0])."'";
+                                    }
                                 } else {
-                                    $str_param = substr(trim($paramparts[1]),1); // drop the first char "
-                                    $str_wrapper = (strpos($paramparts[1],'$')!==false) ? '' : '"';
-                                    $tdata[] = "'".trim($paramparts[0])."' => ".$str_wrapper . $this->varReplace($str_param, $loopLevel).$str_wrapper;
+                                    if (trim($paramparts[0]) != '') {
+                                        $str_param = substr(trim($paramparts[1]),1); // drop the first char "
+                                        $str_wrapper = (strpos($paramparts[1],'$')!==false) ? '' : '"';
+                                        $tdata[] = "'".trim($paramparts[0])."' => ".$str_wrapper . $this->varReplace($str_param, $loopLevel).$str_wrapper;
+                                    }
                                 }
                             }
                         }
