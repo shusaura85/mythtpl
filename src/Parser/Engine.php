@@ -254,7 +254,8 @@ class Engine
         $codeSplit = $this->splitHtml($code);
 
         //variables initialization
-        $parsedCode = $commentIsOpen = $ignoreIsOpen = $phpIsOpen = NULL;
+        $parsedCode = '';
+		$commentIsOpen = $ignoreIsOpen = $phpIsOpen = FALSE;
         $openIf = $loopLevel = 0;
 
         // if the template is not empty
