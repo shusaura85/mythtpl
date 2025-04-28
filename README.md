@@ -27,6 +27,7 @@ Supported tags
 * {php} if you really must use PHP inside your templates (disabled by default in configuration)
 * {autoescape} to automatically escape all tag values inside
 * {elseif} {else} {break} {continue} to use with conditional or looping tags
+* {t} to include a component. Similar to {include} but it can be configured with attributes ({t="component" attr="value" attr2="value2" ...}). Attributes are available in the included component inside $tdata variable as array.  
 
 
 Installation / Usage
