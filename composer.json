@@ -4,7 +4,7 @@
     "description": "Easy to use template system for PHP",
     "homepage":"https://github.com/shusaura85/mythtpl",
     "license": "MIT",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "authors": [
         {
             "name": "Shu Saura"
