@@ -75,7 +75,8 @@ class Engine
         'variable' => '/{\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                                //    {$variable} {$variable|modifier[|modifier]} {$variable|modifier:param2,param3,"param4"} {$variable|modifier:param2,param3,"param4"|another[|....]}
         'constant' => '/{\#[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*\#{0,1}}/',                                         //    {#CONSTANT} {#CONSTANT|modifier[|modifier]} {#CONSTANT|modifier:param2,param3,"param4"} {#CONSTANT|modifier:param2,param3,"param4"|another[|....]}
 
-        'component' => '/{t="(?<tname>([^"]*))"(?<tval> (.*?)){0,1}}/',                                            // {t="component/input"[ attrib="$value"][ attrib2="value2"][ attrib3="$variable"]} - include a component and give it the data required using attributes similar to html tags. Attributes are available in the $tdata variable
+        'assignment' => '/{do\s\$[^}]+?(?:(?:(\'|")[^\1]*?\1)[^}]*?)*}/',                                          //    {do $variable assignment}
+        'component' => '/{t="(?<tname>([^"]*))"(?<tval> (.*?)){0,1}}/',                                            //    {t="component/input"[ attrib="$value"][ attrib2="value2"][ attrib3="$variable"]} - include a component and give it the data required using attributes similar to html tags. Attributes are available in the $tdata variable
     );
 
     // safety check for templates - prevent accessing template file directly
@@ -560,6 +561,13 @@ class Engine
                 }
 
 
+                //set
+                if (preg_match($tagMatch['assignment'], $html, $matches)) {
+                    $parsedCode .= "<?php " . $this->varReplace(substr($matches[0], 3, -1), $loopLevel, $escape = FALSE, $echo = FALSE) . "; ?>";
+
+                    continue;    // go to next loop step
+                }
+				
                 //component tag
                 if (preg_match($tagMatch['component'], $html, $matches)) {
                     //get the folder of the actual component template
