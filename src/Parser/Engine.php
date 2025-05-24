@@ -202,7 +202,7 @@ class Engine
         $arr = [];
 
         // get tags and positions
-        preg_match_all("/({[^'\"}]+((\"[^\"]*\"|'[^']*')[^'\"}]*)*})/", $code, $output, PREG_OFFSET_CAPTURE);
+        preg_match_all("/({[^'\"\n\r}]+((\"[^\"]*\"|'[^']*')[^'\"\n\r}]*)*})/", $code, $output, PREG_OFFSET_CAPTURE);
 
         $pos = 0;
         foreach ($output[0] as $key => $tag) {
