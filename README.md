@@ -18,6 +18,7 @@ Supported tags
 --------
 * {$variable} to include a variable in the template
 * {#CONSTANT} or {#'string'} to include a constant or string
+* {do $variable<assignment>} to do an assignment. ex: {do $x = 2} / {do $x += 5} / etc. Any operations that don't require echo-ing the value.
 * {if} for conditional blocks
 * {loop} to loop over arrays
 * {include} to include another template
@@ -27,7 +28,7 @@ Supported tags
 * {php} if you really must use PHP inside your templates (disabled by default in configuration)
 * {autoescape} to automatically escape all tag values inside
 * {elseif} {else} {break} {continue} to use with conditional or looping tags
-* {t} to include a component. Similar to {include} but it can be configured with attributes ({t="component" attr="value" attr2="value2" ...}). Attributes are available in the included component inside $tdata variable as array.  
+* {t} to include a component. Similar to {include} but it can be configured with attributes ({t="component" attr="value" attr2="value2" ...}). Attributes are available in the included component inside $tdata variable as array. Component templates are stored separate from standard template files.  
 
 
 Installation / Usage
